@@ -29,18 +29,17 @@ def compute_cost(X, y, theta):
         The computed cost value as a single float.
     """
     # get the number of training examples
-    m = 
+    m = X.shape[0]
 
     # Compute the predictions using the linear model by formula h(θ) = X @ θ
     # where @ is the matrix multiplication operator
-    h_o = 
+    h_o = X @ theta
 
     # Compute the error vector between predictions and actual values
     # The error is the difference between the predicted values and the actual values
-    errors =
+    errors = h_o - y
 
     # Compute the cost as the mean squared error cost function using the formula in the docstring
-    J_o = 
-    J_o = np.sum()
-
-    return 
+    J_o = (1 / (2 * m)) * np.sum(errors ** 2)
+    
+    return J_o
