@@ -154,11 +154,35 @@ def main():
     # O número de iterações determina quantas vezes os parâmetros serão atualizados.
     iterations = 1500
 
-    # A taxa de aprendizado (alpha) controla o tamanho do passo dado em cada iteração do algoritmo de descida do gradiente.
-    # Um alpha muito grande pode fazer o algoritmo divergir, enquanto um muito pequeno pode torná-lo lento.
-    # Aqui, alpha é definido como 0.01, um valor comumente usado em problemas de regressão linear.
-    # Você pode experimentar outros valores para ver como o algoritmo se comporta.
+    
+    alphas = [0.03]
+
+    # Dicionário para armazenar histórico de custo para cada alpha
+    J_histories = {}
+
+    print('\nComparando curvas de convergência para diferentes taxas de aprendizado...')
+    plt.figure(figsize=(10, 6))
+    for alpha in alphas:
+        theta_init = np.array([8.5, 4.0])
+        _, J_history, _ = gradient_descent(x_aug, y, theta_init, alpha, iterations)
+    # Encontra o índice do primeiro NaN ou infinito
+        invalid_idx = np.where(~np.isfinite(J_history))[0]
+        if invalid_idx.size > 0:
+            end = invalid_idx[0]
+            plt.plot(np.arange(1, end + 1), J_history[:end], label=f'alpha={alpha} (explodiu)')
+            print(f"Gradiente explodiu para alpha={alpha} na iteração {end}")
+        else:
+            plt.plot(np.arange(1, iterations + 1), J_history, label=f'alpha={alpha}')
+    plt.xlabel('Iteração')
+    plt.ylabel('Custo J(θ)')
+    plt.legend()
+    plt.grid(True)
+    plt.savefig("Figures/convergencia_multiplos_alphas.png", dpi=300, bbox_inches='tight')
+    plt.show()
+
+    # Escolhe um alpha para continuar o restante do script
     alpha = 0.01
+
 
     print('\nTestando a função de custo...')
     # Utiliza a função compute_cost para calcular o custo com os parâmetros iniciais (theta = [0, 0]).
@@ -181,13 +205,9 @@ def main():
 
     print('\nExecutando a descida do gradiente...')
     # Executa o algoritmo de descida do gradiente para encontrar os parâmetros ótimos (theta).
-    # A função gradient_descent é definida em Functions/gradient_descent.py
-    # e foi importada anteriormente.
-    # Ela recebe como parâmetros a matriz x_aug (com 1s e valores de x), o vetor y (lucro),
-
-    # Após os testes, inicializamos os parâmetros theta com valores diferentes de zero.
+   
     # theta = [8.5, 4.0] é o ponto de partida padrão. Foi estabelecido empiricamente ao olhar os gráficos.
-    # Você pode experimentar outros valores para ver como o algoritmo se comporta.
+
     theta = np.array([8.5, 4.0])
     # o vetor theta, a taxa de aprendizado (alpha) e o número de iterações.
     # A função retorna os parâmetros ajustados (theta), o histórico de custos (J_history) e o histórico de theta (theta_history).
