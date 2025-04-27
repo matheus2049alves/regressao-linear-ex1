@@ -177,15 +177,15 @@ Dúvidas, estou à disposição por e-mail ou em sala.
 ## Reconhecimentos e Direitos Autorais
 
 ```
-@autor:                [Seu Nome]  
-@contato:              [Seu Email]  
+@autor:                [Matheus Costa Alves]  
+@contato:              [mc.alves@discente.ufma.br]  
 @data última versão:   20/04/2025  
 @versão:               1.0  
 @outros repositórios:  [URLs opcionais]  
 @Agradecimentos:       Universidade Federal do Maranhão (UFMA),  
-                       Prof. Dr. Thales Levi Azevedo Valente, thales.l.a.valente@gmail.com
-                       https://www.linkedin.com/in/thalesvalente/
-                       colegas de curso.
+                       
+                
+                       
 ```
 
 ---
